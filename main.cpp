@@ -5,7 +5,8 @@
 // #include "main.h"
 #include <cstdlib>
 #include <iostream>
-#include "Generation.h"
+
+#include "Headers/Generation.h"
 
 using std::cout;
 
@@ -22,5 +23,7 @@ int main(){
 
     Generation a(dimPop,inter,eq,precision,crossProb,mutProb, generations);
     a.start();
+
+
 }
 

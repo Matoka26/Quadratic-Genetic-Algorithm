@@ -6,10 +6,10 @@
 #define ALGORITMI_GENETICI_GENERATION_H
 
 #endif //ALGORITMI_GENETICI_GENERATION_H
-#include "Chromosome.h"
-#include "Interval.h"
-#include "Equation.h"
-#include "NullStream.h"
+#include "Headers/Chromosome.h"
+#include "Headers/Interval.h"
+#include "Headers/Equation.h"
+#include "Headers/NullStream.h"
 #include <iomanip>
 #include <vector>
 #include <cmath>

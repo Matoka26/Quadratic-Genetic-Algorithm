@@ -52,7 +52,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "C:/Users/Mihai/Desktop/Algoritmi genetici/."
+					"path" : "C:/Users/Mihai/Desktop/chestii/facultate shit/repos/Quadratic-Genetic-Algorithm/."
 				}
 			],
 			"language" : "CXX",
@@ -128,27 +128,27 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "main.h",
+			"path" : "Headers/main.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Generation.h",
+			"path" : "Headers/Generation.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Interval.h",
+			"path" : "Headers/Interval.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Equation.h",
+			"path" : "Headers/Equation.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "NullStream.h",
+			"path" : "Headers/NullStream.h",
 			"sourceGroupIndex" : 1
 		}
 	],

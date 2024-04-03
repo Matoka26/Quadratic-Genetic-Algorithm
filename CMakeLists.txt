@@ -7,8 +7,8 @@ include_directories(.)
 
 add_executable(Algoritmi_genetici
         main.cpp
-        main.h
-        Generation.h
-        Interval.h
-        Equation.h
-        NullStream.h)
+        Headers/main.h
+        Headers/Generation.h
+        Headers/Interval.h
+        Headers/Equation.h
+        Headers/NullStream.h)

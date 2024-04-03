@@ -248,13 +248,16 @@ vector<std::pair<double,double>> Generation::allSteps(){
 
     Chromosome max = maximum();
     cout<<"Evolutia Maximului\n";
-    printf("%f\n", max.getFx());
+    printf("Max fitness %f\n", max.getFx());
 
     vector<std::pair<double,double>> coords;
 
-    for(int i = 0 ; i < this->chroms.size() ; i++)
+    double fitSum = 0;
+    for(int i = 0 ; i < this->chroms.size() ; i++) {
+        fitSum += this->chroms[i].getFx();
         coords.push_back({this->chroms[i].getX(), this->chroms[i].getFx()});
-
+    }
+    printf("Mean fitness %f\n\n", fitSum/this->chroms.size());
     return coords;
 }
 

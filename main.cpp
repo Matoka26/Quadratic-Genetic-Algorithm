@@ -13,7 +13,7 @@ using std::cout;
 int main(){
     srand(static_cast<unsigned>(time(nullptr)));
 
-    Interval inter = {-5,5};
+    Interval inter = {-1,1};
     Equation eq = {-2,3,10};
     int dimPop = 1000;
     int precision = 4;

@@ -18,7 +18,7 @@ using std::cout;
 
 class Generation{
 private:
-    static std::uniform_real_distribution<double> disX; // Uniform distribution [0, 1)
+    static std::uniform_real_distribution<double> disX;
     vector<Chromosome>chroms;
     Interval interval;
     Equation equation;
@@ -33,7 +33,7 @@ private:
     void selectChroms();
     void crossChroms(vector<Chromosome>& v, const vector<int>& ind);
     int binarySearch(double u);
-
+    void plot(vector<std::pair<double,double>> coords);
 public:
     Generation(int dimPop, const Interval& interval, const Equation& equation,
                int precision, double crossProbab, double mutProbab, int generations);
@@ -43,7 +43,7 @@ public:
     void printProbabSelectie();
     void printCrossSelection();
     void printMutation();
-    void allSteps();
+    vector<std::pair<double,double>> allSteps();
     void start();
 };
 std::uniform_real_distribution<double> Generation::disX(0,1); // Uniform distribution [0, 1)
@@ -62,7 +62,7 @@ Generation::Generation(int dimPop, const Interval& interval, const Equation& equ
     this->disX = std::uniform_real_distribution<double>(this->interval.a, this->interval.b);
 
     // get the size of a Chromosome
-    int size = ceil(log2((interval.b - interval.a) * pow(10,precision) + 1));
+    //int size = ceil(log2((interval.b - interval.a) * pow(10,precision) + 1));
 
     // create Chromosomes
     while(dimPop--){
@@ -72,13 +72,14 @@ Generation::Generation(int dimPop, const Interval& interval, const Equation& equ
 }
 
 Chromosome Generation::maximum() {
-    double max = this->interval.a;
+    double max = -1.79769E+308;
     Chromosome temp;
     for(int i = 0 ; i < this->chroms.size() ; i++)
-        if(this->chroms[i].getFx() > max){
+        if(this->chroms[i].getFx() >= max){
             max = this->chroms[i].getFx();
             temp = this->chroms[i];
         }
+
     return temp;
 }
 
@@ -227,7 +228,7 @@ void Generation::printMutation() {
     if(!checkAny) cout<<"Niciunul\n";
 }
 
-void Generation::allSteps(){
+vector<std::pair<double,double>> Generation::allSteps(){
 
     // selection
     printProbabSelectie();
@@ -245,8 +246,36 @@ void Generation::allSteps(){
     printMutation();
     printChroms();
 
+    Chromosome max = maximum();
     cout<<"Evolutia Maximului\n";
-    printf("%f\n",maximum().getFx());
+    printf("%f\n", max.getFx());
+
+    vector<std::pair<double,double>> coords;
+
+    for(int i = 0 ; i < this->chroms.size() ; i++)
+        coords.push_back({this->chroms[i].getX(), this->chroms[i].getFx()});
+
+    return coords;
+}
+
+void Generation::plot(vector<std::pair<double, double>> coords) {
+
+    FILE *fp = NULL;
+    FILE *gnupipe = NULL;
+    char *GnuCommands [] = {"set title \"Demo\"",
+                            "plot 'data.tmp'"};
+
+    fp = fopen("data.tmp","w");
+    gnupipe = _popen("gnuplot -persistent", "w");
+
+    for(int i = 0 ; i < coords.size() ; i++){
+        fprintf(fp, "%f %f\n", coords[i].first, coords[i].second);
+    }
+
+    for(int i = 0 ; i < 2 ; i++){
+        fprintf(gnupipe, "%s\n", GnuCommands[i]);
+    }
+
 }
 
 void Generation::start() {
@@ -254,6 +283,7 @@ void Generation::start() {
     // init x, fx
     cout<<"Populatia initiala\n";
     printChroms();
+    
     allSteps();
 
     NullBuffer nullbfr;
@@ -261,9 +291,12 @@ void Generation::start() {
     std::streambuf *coutBuffer = std::cout.rdbuf();
     std::cout.rdbuf(nullStream.rdbuf());
 
-    for(int i = 1 ; i < this->generations ; i++){
+
+    for(int i = 1 ; i < this->generations - 1 ; i++){
         allSteps();
     }
+
+    plot(allSteps());
     std::cout.rdbuf(coutBuffer);
 }
 

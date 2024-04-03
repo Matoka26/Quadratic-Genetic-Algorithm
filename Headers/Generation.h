@@ -16,6 +16,9 @@
 using std::vector;
 using std::cout;
 
+std::ofstream out("../output.txt");
+FILE *filePtr = fopen("../output.txt", "a");
+
 class Generation{
 private:
     static std::uniform_real_distribution<double> disX;
@@ -244,11 +247,13 @@ vector<std::pair<double,double>> Generation::allSteps(){
     // mutation
     cout<<"Probabilitate de mutatie pentru fiecare gena "<<this->mutProbab<<std::endl;
     printMutation();
+    cout<<"Dupa mutatie\n";
     printChroms();
 
     Chromosome max = maximum();
     cout<<"Evolutia Maximului\n";
-    printf("Max fitness %f\n", max.getFx());
+    fprintf(filePtr,"Max fitness %f\n", max.getFx());
+
 
     vector<std::pair<double,double>> coords;
 
@@ -257,7 +262,7 @@ vector<std::pair<double,double>> Generation::allSteps(){
         fitSum += this->chroms[i].getFx();
         coords.push_back({this->chroms[i].getX(), this->chroms[i].getFx()});
     }
-    printf("Mean fitness %f\n\n", fitSum/this->chroms.size());
+    fprintf(filePtr,"Mean fitness %f\n\n", fitSum/this->chroms.size());
     return coords;
 }
 
@@ -280,28 +285,36 @@ void Generation::plot(vector<std::pair<double, double>> coords) {
     }
 
 }
-
 void Generation::start() {
+
+    // Redirect cout to file
+    std::streambuf* coutBuffer = std::cout.rdbuf(); // Store the original cout buffer
+    std::streambuf* outFileBuffer = out.rdbuf(); // Get the file stream buffer
+    std::cout.rdbuf(outFileBuffer); // Redirect cout to the file
 
     // init x, fx
     cout<<"Populatia initiala\n";
     printChroms();
-    
-    allSteps();
 
+    allSteps();
+    // Restore cout
+    std::cout.rdbuf(coutBuffer);
+
+    // Redirect cout to nullBuffer
     NullBuffer nullbfr;
     std::ostream nullStream(&nullbfr);
-    std::streambuf *coutBuffer = std::cout.rdbuf();
     std::cout.rdbuf(nullStream.rdbuf());
-
 
     for(int i = 1 ; i < this->generations - 1 ; i++){
         allSteps();
     }
 
+
     plot(allSteps());
+
+    // Restoring cout to its original stream buffer
     std::cout.rdbuf(coutBuffer);
+
+
 }
-
-
 /// randomizeaza cum se aleg astia la cross over

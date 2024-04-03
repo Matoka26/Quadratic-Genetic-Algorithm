@@ -1,0 +1,66 @@
+Max fitness 2.249994
+Mean fitness 1.830150
+
+Max fitness 2.249982
+Mean fitness 1.928210
+
+Max fitness 2.249982
+Mean fitness 2.061392
+
+Max fitness 2.249982
+Mean fitness 2.023545
+
+Max fitness 2.249998
+Mean fitness 2.066890
+
+Max fitness 2.249998
+Mean fitness 2.059468
+
+Max fitness 2.249999
+Mean fitness 2.089559
+
+Max fitness 2.249999
+Mean fitness 2.062118
+
+Max fitness 2.249999
+Mean fitness 2.115700
+
+Max fitness 2.250000
+Mean fitness 2.049171
+
+Max fitness 2.249949
+Mean fitness 1.895020
+
+Max fitness 2.249949
+Mean fitness 1.920514
+
+Max fitness 2.249925
+Mean fitness 1.972256
+
+Max fitness 2.249925
+Mean fitness 1.941290
+
+Max fitness 2.249955
+Mean fitness 2.054342
+
+Max fitness 2.249996
+Mean fitness 2.060908
+
+Max fitness 2.249969
+Mean fitness 1.953612
+
+Max fitness 2.249969
+Mean fitness 1.955024
+
+Max fitness 2.249974
+Mean fitness 2.050256
+
+Max fitness 2.250000
+Mean fitness 2.086399
+
+Max fitness 2.250000
+Mean fitness 1.895010
+
+Max fitness 2.249959
+Mean fitness 2.082577
+
